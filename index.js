@@ -13,10 +13,11 @@ const scene = new THREE.Scene()
 
 
 const loader = new GLTFLoader()
-loader.load('assets/fem_head/scene.gltf', function(gltf){
+// loader.load('assets/fem_head/scene.gltf', function(gltf){
+loader.load('assets/wraith/gltf/wraith.gltf', function(gltf){
     console.log(gltf)
     const root = gltf.scene;
-    root.scale.set(0.02, 0.02, 0.02)
+    root.scale.set(0.01,0.01,0.01)
 
     scene.add(root);
 }, function(xhr){
@@ -26,16 +27,9 @@ loader.load('assets/fem_head/scene.gltf', function(gltf){
 })
 
 
-const light = new THREE.DirectionalLight(0xffffff, 1)
+const light = new THREE.DirectionalLight(0xffffff, 1.5)
 light.position.set(1, 1, 5)
 scene.add(light)
-
-// const geometry = new THREE.BoxGeometry(1, 1, 1)
-// const material = new THREE.MeshBasicMaterial({
-//     color: "red"
-// })
-// const boxMesh = new THREE.Mesh(geometry, material)
-// scene.add(boxMesh)
 
 
 const sizes = {
@@ -43,8 +37,14 @@ const sizes = {
     height: window.innerHeight
 }
 
-const camera = new THREE.PerspectiveCamera(115, sizes.width/sizes.height, 0.1, 100)
-camera.position.set(0,1,2)
+// here is how the camera points when the site is rendered
+// const camera = new THREE.PerspectiveCamera(4, sizes.width/sizes.height, 0.5, 100)
+// camera.position.set(0,0,20)
+
+    const camera = new THREE.PerspectiveCamera(17, 
+    window.innerWidth/window.innerHeight, 0.5, 1000 ); // Specify camera type like this
+    camera.position.set(0,0,2); // Set position like this
+    // camera.lookAt(new THREE.Vector3(2,2.5,500)); // Set look at coordinate like this
 scene.add(camera)
 
 const renderer = new THREE.WebGL1Renderer({
@@ -52,6 +52,8 @@ const renderer = new THREE.WebGL1Renderer({
 })
 
 const controls = new OrbitControls(camera, renderer.domElement)
+
+// controls.target.set(4.5, 0, 4.5)
 
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
