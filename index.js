@@ -17,7 +17,7 @@ const loader = new GLTFLoader()
 loader.load('assets/wraith/gltf/wraith.gltf', function(gltf){
     console.log(gltf)
     const root = gltf.scene;
-    root.scale.set(0.01,0.01,0.01)
+    root.scale.set(0.05,0.05,0.05)
 
     scene.add(root);
 }, function(xhr){
@@ -41,19 +41,22 @@ const sizes = {
 // const camera = new THREE.PerspectiveCamera(4, sizes.width/sizes.height, 0.5, 100)
 // camera.position.set(0,0,20)
 
-    const camera = new THREE.PerspectiveCamera(17, 
+    const camera = new THREE.PerspectiveCamera(10, 
     window.innerWidth/window.innerHeight, 0.5, 1000 ); // Specify camera type like this
-    camera.position.set(0,0,2); // Set position like this
+    camera.position.set(0,0,20); // Set position like this
     // camera.lookAt(new THREE.Vector3(2,2.5,500)); // Set look at coordinate like this
 scene.add(camera)
+
+var axesHelper = new THREE.AxesHelper( 5 );
+scene.add( axesHelper );
 
 const renderer = new THREE.WebGL1Renderer({
     canvas: canvas
 })
 
-const controls = new OrbitControls(camera, renderer.domElement)
+// //This will make the animation to be able to be controlled.
+// const controls = new OrbitControls(camera, renderer.domElement)
 
-// controls.target.set(4.5, 0, 4.5)
 
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
