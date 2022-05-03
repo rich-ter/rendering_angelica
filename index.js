@@ -13,10 +13,10 @@ const scene = new THREE.Scene()
 
 
 const loader = new GLTFLoader()
-loader.load('assets/wraith/gltf/wraith.gltf', function(gltf){
+loader.load('assets/fem_head/scene.gltf', function(gltf){
     console.log(gltf)
     const root = gltf.scene;
-    root.scale.set(0.03, 0.03, 0.03)
+    root.scale.set(0.02, 0.02, 0.02)
 
     scene.add(root);
 }, function(xhr){
@@ -43,13 +43,15 @@ const sizes = {
     height: window.innerHeight
 }
 
-const camera = new THREE.PerspectiveCamera(75, sizes.width/sizes.height, 0.1, 100)
+const camera = new THREE.PerspectiveCamera(115, sizes.width/sizes.height, 0.1, 100)
 camera.position.set(0,1,2)
 scene.add(camera)
 
 const renderer = new THREE.WebGL1Renderer({
     canvas: canvas
 })
+
+const controls = new OrbitControls(camera, renderer.domElement)
 
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
