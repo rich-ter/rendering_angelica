@@ -1,10 +1,9 @@
 import * as THREE from './three.js-master/build/three.module.js'
-import {GLTFLoader} from './three.js-master/examples/js/loaders/GLTFLoader.js'
+// import {GLTFLoader} from './three.js-master/examples/js/loaders/GLTFLoader.js'
 
 console.log(THREE)
-
 // const canvas = document.querySelector('.webgl')
-// const scene = THREE.Scene()
+// const scene = new THREE.Scene()
 
 // const loader = new GLTFLoader()
 // loader.load('./assets/scene.gltf', function(gltf){
@@ -31,4 +30,4 @@ console.log(THREE)
 // renderer.setSize(sizes.width, sizes.height)
 // renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 // renderer.shadowMap.enabled = true
-// renderer.gammaOutput = true
+// renderer.gammaOuput = true
