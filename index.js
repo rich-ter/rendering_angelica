@@ -13,11 +13,11 @@ const scene = new THREE.Scene()
 
 
 const loader = new GLTFLoader()
-// loader.load('assets/fem_head/scene.gltf', function(gltf){
-loader.load('assets/wraith/gltf/wraith.gltf', function(gltf){
+loader.load('assets/fem_head/scene.gltf', function(gltf){
+// loader.load('assets/wraith/gltf/wraith.gltf', function(gltf){
     console.log(gltf)
     const root = gltf.scene;
-    root.scale.set(0.05,0.05,0.05)
+    root.scale.set(0.001,0.001,0.001)
 
     scene.add(root);
 }, function(xhr){
@@ -41,11 +41,29 @@ const sizes = {
 // const camera = new THREE.PerspectiveCamera(4, sizes.width/sizes.height, 0.5, 100)
 // camera.position.set(0,0,20)
 
-    const camera = new THREE.PerspectiveCamera(10, 
-    window.innerWidth/window.innerHeight, 0.5, 1000 ); // Specify camera type like this
-    camera.position.set(0,0,20); // Set position like this
-    // camera.lookAt(new THREE.Vector3(2,2.5,500)); // Set look at coordinate like this
-scene.add(camera)
+
+// Setting up camera
+const aspectRatio = window.innerWidth / window.innerHeight;
+const cameraWidth = 8;
+const cameraHeight = cameraWidth / aspectRatio;
+
+const camera = new THREE.OrthographicCamera(
+  cameraWidth / -1.25, // left
+  cameraWidth / 1.25, // right
+  cameraHeight / 1, // top
+  cameraHeight / -2, // bottom
+  0, // near plane
+  1000 // far plane
+);
+camera.position.set(0, 0, 20);
+camera.lookAt(0, 0, 0);
+
+
+    // const camera = new THREE.PerspectiveCamera(10, 
+    // window.innerWidth/window.innerHeight, 0.5, 1000 ); // Specify camera type like this
+    // camera.position.set(0,0,20); // Set position like this
+    // // camera.lookAt(new THREE.Vector3(2,2.5,500)); // Set look at coordinate like this
+// scene.add(camera)
 
 var axesHelper = new THREE.AxesHelper( 5 );
 scene.add( axesHelper );
@@ -55,7 +73,7 @@ const renderer = new THREE.WebGL1Renderer({
 })
 
 // //This will make the animation to be able to be controlled.
-// const controls = new OrbitControls(camera, renderer.domElement)
+const controls = new OrbitControls(camera, renderer.domElement)
 
 
 renderer.setSize(sizes.width, sizes.height)
